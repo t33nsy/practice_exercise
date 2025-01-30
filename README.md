@@ -12,14 +12,23 @@ pip install -r ./requirements.txt
 
 Также в случае проблем с **Graphviz** есть вариант модуля авл-дерева без визуализаций (файл ```avl_without_viz.py```)
 
-Примеры отрисовки представлены в файлах ```viz[1-3].png```
+Примеры отрисовки представлены в файлах ```viz[1-5].png```
 
-![AAAAAA](https://github.com/t33nsy/practice_exercise/blob/main/viz1.png)
+![AAAAAA](https://github.com/t33nsy/practice_exercise/blob/main/viz/viz1.png)
 +
-![AAAAAA](https://github.com/t33nsy/practice_exercise/blob/main/viz2.png)
+![AAAAAA](https://github.com/t33nsy/practice_exercise/blob/main/viz/viz2.png)
 =
 
-![AAAAAA](https://github.com/t33nsy/practice_exercise/blob/main/viz3.png)
+![AAAAAA](https://github.com/t33nsy/practice_exercise/blob/main/viz/viz3.png)
+
+Пример разделения 
+
+![AAAAAA](https://github.com/t33nsy/practice_exercise/blob/main/viz/viz3.png)
+
+->
+![AAAAAA](https://github.com/t33nsy/practice_exercise/blob/main/viz/viz4.png)
++
+![AAAAAA](https://github.com/t33nsy/practice_exercise/blob/main/viz/viz5.png)
 
 ## Немного слов про ассоциативный массив
 
