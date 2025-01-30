@@ -97,15 +97,15 @@ class AVLTree:
 
         # Левый перевес
         if balance > 1:
-            if self._get_balance(node.left) < 0:  # Левый-правый случай
+            if self._get_balance(node.left) < 0:  # большой левый
                 node.left = self._rotate_left(node.left)
-            return self._rotate_right(node)  # Левый-левый случай
+            return self._rotate_right(node)  # малый левый
 
         # Правый перевес
         if balance < -1:
-            if self._get_balance(node.right) > 0:  # Правый-левый случай
+            if self._get_balance(node.right) > 0:  # большой правый
                 node.right = self._rotate_right(node.right)
-            return self._rotate_left(node)  # Правый-правый случай
+            return self._rotate_left(node)  # малый правый
 
         return node
 
