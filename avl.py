@@ -361,6 +361,44 @@ class AVLTree:
         self._merge_nodes(node.left)
         self._merge_nodes(node.right)
 
+    def split_tree(self, key) -> tuple:
+        """Разделение авл дерева по ключу
+
+        Args:
+            key (int): ключ с которой вершины будет происходить разделение
+
+        Returns:
+            tuple: полученные новые деревья
+        """
+        left, right = AVLTree(), AVLTree()
+        self.root, left_root, right_root = self._split_tree(self.root, key)
+        left.root, right.root = left_root, right_root
+        return left, right
+
+    def _split_tree(self, node, key) -> tuple:
+        """Разделение авл дерева по ключу (внутренняя часть)
+
+        Args:
+            node (AVLNode): текущий узел
+            key (int): ключ для деления
+
+        Returns:
+            tuple: новые вершины
+        """
+        if not node:
+            return None, None, None
+        if key < node.key:
+            node.left, left_root, right_root = self._split_tree(node.left, key)
+            return node, left_root, self._balance_node(right_root)
+        elif key > node.key:
+            node.right, left_root, right_root = self._split_tree(node.right, key)
+            return self._balance_node(left_root), node, right_root
+        else:
+            # Нашли узел по которому делим
+            left_root, right_root = node.left, node.right
+            node.left, node.right = None, None
+            return node, left_root, right_root
+
 
 # Пример использования
 if __name__ == "__main__":
@@ -375,7 +413,7 @@ if __name__ == "__main__":
     print("Search (20): ", avl_tree.search(20), avl_tree.search(20).key)
 
     # Визуализация в случае правильно установленного Graphviz
-    avl_tree.visualize("viz1")
+    avl_tree.visualize("./viz/viz1")
 
     # Удаление узла
     avl_tree.delete(30)
@@ -383,7 +421,7 @@ if __name__ == "__main__":
     print("AVL validation:", avl_tree.validate_avl_tree())
 
     # Визуализация после удаления в случае правильно установленного Graphviz
-    avl_tree.visualize("viz2")
+    avl_tree.visualize("./viz/viz2")
 
     avl_tree1 = AVLTree()
     for key in [1, 2, 3, 23, 11, 124, 12, 5]:
@@ -393,4 +431,14 @@ if __name__ == "__main__":
     avl_tree.merge_trees(avl_tree1)
     print("Inorder traversal after merge:", avl_tree.inorder_traversal())
     print("AVL validation:", avl_tree.validate_avl_tree())
-    avl_tree.visualize("viz3")
+    avl_tree.visualize("./viz/viz3")
+
+    # Разделение деревьев
+    left, right = avl_tree.split_tree(10)
+    print("Inorder traversal left:", left.inorder_traversal())
+    print("Inorder traversal right:", right.inorder_traversal())
+    print("AVL validation:", avl_tree.validate_avl_tree())
+    print("Left validation:", left.validate_avl_tree())
+    print("Right validation:", right.validate_avl_tree())
+    left.visualize("./viz/viz4")
+    right.visualize("./viz/viz5")

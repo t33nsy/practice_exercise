@@ -276,6 +276,30 @@ class AVLTree:
             result.extend(self._preorder_traversal(node.right))
         return result
 
+    def postorder_traversal(self) -> list:
+        """Обход дерева в порядке (postorder)
+
+        Returns:
+            list: список узлов
+        """
+        return self._postorder_traversal(self.root)
+
+    def _postorder_traversal(self, node) -> list:
+        """Обход дерева в порядке (postorder) (внутренняя приватная часть)
+
+        Args:
+            node (AVLNode): узел для начала обхода и последующей рекурсии
+
+        Returns:
+            list: список узлов
+        """
+        result = []
+        if node:
+            result.extend(self._postorder_traversal(node.left))
+            result.extend(self._postorder_traversal(node.right))
+            result.append(node.key)
+        return result
+
     def count_nodes(self) -> int:
         """Подсчет количества узлов в дереве
 
@@ -348,6 +372,44 @@ class AVLTree:
         self._merge_nodes(node.left)
         self._merge_nodes(node.right)
 
+    def split_tree(self, key: int) -> tuple:
+        """Разделение авл дерева по ключу
+
+        Args:
+            key (int): ключ с которой вершины будет происходить разделение
+
+        Returns:
+            tuple: полученные новые деревья
+        """
+        left, right = AVLTree(), AVLTree()
+        self.root, left_root, right_root = self._split_tree(self.root, key)
+        left.root, right.root = left_root, right_root
+        return left, right
+
+    def _split_tree(self, node, key) -> tuple[AVLNode, AVLNode, AVLNode]:
+        """Разделение авл дерева по ключу (внутренняя часть)
+
+        Args:
+            node (AVLNode): текущий узел
+            key (int): ключ для деления
+
+        Returns:
+            tuple: новые вершины
+        """
+        if not node:
+            return None, None, None
+        if key < node.key:
+            node.left, left_root, right_root = self._split_tree(node.left, key)
+            return node, left_root, self._balance_node(right_root)
+        elif key > node.key:
+            node.right, left_root, right_root = self._split_tree(node.right, key)
+            return self._balance_node(left_root), node, right_root
+        else:
+            # Нашли узел по которому делим
+            left_root, right_root = node.left, node.right
+            node.left, node.right = None, None
+            return node, left_root, right_root
+
 
 # Пример использования
 if __name__ == "__main__":
@@ -374,3 +436,8 @@ if __name__ == "__main__":
     avl_tree.merge_trees(avl_tree1)
     print("Inorder traversal after merge:", avl_tree.inorder_traversal())
     print("AVL validation:", avl_tree.validate_avl_tree())
+
+    # Разделение деревьев
+    left, right = avl_tree.split_tree(20)
+    print("Inorder traversal left:", left.inorder_traversal())
+    print("Inorder traversal right:", right.inorder_traversal())
