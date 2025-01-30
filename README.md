@@ -11,3 +11,9 @@ pip install -r ./requirements.txt
 ```
 
 Также в случае проблем с **Graphviz** есть вариант модуля авл-дерева без визуализаций (файл ```avl_without_viz.py```)
+
+Примеры отрисовки представлены в файлах ```viz[1-3].png```
+
+![AAAAAA](https://github.com/t33nsy/practice_exercise/blob/main/viz1.png)
+![AAAAAA](https://github.com/t33nsy/practice_exercise/blob/main/viz2.png)
+![AAAAAA](https://github.com/t33nsy/practice_exercise/blob/main/viz3.png)
