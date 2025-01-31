@@ -410,6 +410,33 @@ class AVLTree:
             node.left, node.right = None, None
             return node, left_root, right_root
 
+    def __len__(self) -> int:
+        """Магический метод определения количества нод в дереве
+
+        Returns:
+            int: количество нод в дереве
+        """
+        return self._count_nodes(self.root) if self.root else 0
+
+    def __getitem__(self, key) -> AVLNode:
+        """Магический метод получения узла по ключу
+
+        Args:
+            key (int): ключ
+
+        Returns:
+            AVLNode: найденный по ключу узел
+        """
+        return self._search(self.root, key)
+
+    def __delitem__(self, key) -> None:
+        """Магический метод удаления узла по ключу
+
+        Args:
+            key (int): ключ для удаления
+        """
+        self._delete(self.root, key)
+
 
 # Пример использования
 if __name__ == "__main__":
@@ -438,6 +465,6 @@ if __name__ == "__main__":
     print("AVL validation:", avl_tree.validate_avl_tree())
 
     # Разделение деревьев
-    left, right = avl_tree.split_tree(20)
+    left, right = avl_tree.split_tree(10)
     print("Inorder traversal left:", left.inorder_traversal())
     print("Inorder traversal right:", right.inorder_traversal())

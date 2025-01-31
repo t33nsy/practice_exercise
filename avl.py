@@ -13,7 +13,7 @@ class AVLTree:
     def __init__(self):
         self.root = None  # корень дерева
 
-    def _get_height(self, node) -> int:
+    def _get_height(self, node: AVLNode) -> int:
         """Возвращает высоту узла
 
         Args:
@@ -24,7 +24,7 @@ class AVLTree:
         """
         return node.height if node else 0
 
-    def _update_height(self, node) -> None:
+    def _update_height(self, node: AVLNode) -> None:
         """Обновляет высоту узла
 
         Args:
@@ -32,7 +32,7 @@ class AVLTree:
         """
         node.height = max(self._get_height(node.left), self._get_height(node.right)) + 1
 
-    def _get_balance(self, node) -> int:
+    def _get_balance(self, node: AVLNode) -> int:
         """Возвращает баланс узла (разницу высот поддеревьев)
 
         Args:
@@ -43,7 +43,7 @@ class AVLTree:
         """
         return self._get_height(node.left) - self._get_height(node.right) if node else 0
 
-    def _rotate_right(self, y) -> AVLNode:
+    def _rotate_right(self, y: AVLNode) -> AVLNode:
         """Правый поворот вокруг узла y
 
         Args:
@@ -62,7 +62,7 @@ class AVLTree:
         self._update_height(x)
         return x
 
-    def _rotate_left(self, x) -> AVLNode:
+    def _rotate_left(self, x: AVLNode) -> AVLNode:
         """Левый поворот вокруг узла x
 
         Args:
@@ -81,7 +81,7 @@ class AVLTree:
         self._update_height(y)
         return y
 
-    def _balance_node(self, node) -> AVLNode:
+    def _balance_node(self, node: AVLNode) -> AVLNode:
         """Балансировка узла после вставки или удаления
 
         Args:
@@ -103,7 +103,7 @@ class AVLTree:
             return self._rotate_left(node)  # малый правый
         return node
 
-    def insert(self, key) -> None:
+    def insert(self, key: int) -> None:
         """Вставка нового узла с заданным ключом (внутренняя приватная часть)
 
         Args:
@@ -111,7 +111,7 @@ class AVLTree:
         """
         self.root = self._insert(self.root, key)
 
-    def _insert(self, node, key) -> AVLNode:
+    def _insert(self, node: AVLNode, key: int) -> AVLNode:
         """Вставка нового узла с заданным ключом (внутренняя приватная часть)
 
         Args:
@@ -134,7 +134,7 @@ class AVLTree:
         # Балансировка узла
         return self._balance_node(node)
 
-    def _find_min(self, node) -> AVLNode:
+    def _find_min(self, node: AVLNode) -> AVLNode:
         """Находит узел с минимальным значением ключа
 
         Args:
@@ -148,7 +148,7 @@ class AVLTree:
             current = current.left
         return current
 
-    def delete(self, key) -> None:
+    def delete(self, key: int) -> None:
         """Удаление узла с заданным ключом
 
         Args:
@@ -156,7 +156,7 @@ class AVLTree:
         """
         self.root = self._delete(self.root, key)
 
-    def _delete(self, node, key) -> AVLNode:
+    def _delete(self, node: AVLNode, key: int) -> AVLNode:
         """Удаление узла с заданным ключом (внутренняя приватная часть)
 
         Args:
@@ -187,7 +187,7 @@ class AVLTree:
         # Балансировка узла
         return self._balance_node(node)
 
-    def search(self, key) -> AVLNode:
+    def search(self, key: int) -> AVLNode:
         """Поиск узла с заданным ключом
 
         Args:
@@ -198,7 +198,7 @@ class AVLTree:
         """
         return self._search(self.root, key)
 
-    def _search(self, node, key) -> AVLNode:
+    def _search(self, node: AVLNode, key: int) -> AVLNode:
         """Поиск узла с заданным ключом (внутренняя приватная часть)
 
         Args:
@@ -222,7 +222,7 @@ class AVLTree:
         """
         return self._inorder_traversal(self.root)
 
-    def _inorder_traversal(self, node) -> list:
+    def _inorder_traversal(self, node: AVLNode) -> list:
         """Обход дерева в порядке (inorder) (внутренняя приватная часть)
 
         Args:
@@ -246,7 +246,7 @@ class AVLTree:
         """
         return self._preorder_traversal(self.root)
 
-    def _preorder_traversal(self, node) -> list:
+    def _preorder_traversal(self, node: AVLNode) -> list:
         """Обход дерева в порядке (preorder) (внутренняя приватная часть)
 
         Args:
@@ -270,7 +270,7 @@ class AVLTree:
         """
         return self._postorder_traversal(self.root)
 
-    def _postorder_traversal(self, node) -> list:
+    def _postorder_traversal(self, node: AVLNode) -> list:
         """Обход дерева в порядке (postorder) (внутренняя приватная часть)
 
         Args:
@@ -294,7 +294,7 @@ class AVLTree:
         """
         return self._count_nodes(self.root)
 
-    def _count_nodes(self, node) -> int:
+    def _count_nodes(self, node: AVLNode) -> int:
         """Подсчет количества узлов в дереве (внутренняя приватная часть)
 
         Args:
@@ -315,7 +315,7 @@ class AVLTree:
         """
         return self._validate_avl_tree(self.root)
 
-    def _validate_avl_tree(self, node) -> bool:
+    def _validate_avl_tree(self, node: AVLNode) -> bool:
         """Валидация корректности структуры АВЛ-дерева (внутренняя приватная часть)
 
         Args:
@@ -333,7 +333,7 @@ class AVLTree:
             node.right
         )
 
-    def visualize(self, filename="viz") -> None:
+    def visualize(self, filename: str = "viz") -> None:
         """Визуализация дерева с помощью Graphviz
 
         Args:
@@ -345,7 +345,7 @@ class AVLTree:
         img.render(filename)
         print(f"Отрисовка дерева сохранена в файл: {filename}.png")
 
-    def _visualize(self, img, node, filename) -> None:
+    def _visualize(self, img: Digraph, node: AVLNode, filename: str) -> None:
         """Визуализация дерева с помощью Graphviz (внутренняя приватная часть)
 
         Args:
@@ -373,7 +373,7 @@ class AVLTree:
         # Рекурсивно начинаем добавлять вершины
         self._merge_nodes(other.root)
 
-    def _merge_nodes(self, node) -> None:
+    def _merge_nodes(self, node: AVLNode) -> None:
         """Рекурсивная часть добавления узлов из другого дерева
 
         Args:
@@ -385,7 +385,7 @@ class AVLTree:
         self._merge_nodes(node.left)
         self._merge_nodes(node.right)
 
-    def split_tree(self, key) -> tuple:
+    def split_tree(self, key: int) -> tuple:
         """Разделение авл дерева по ключу
 
         Args:
@@ -399,7 +399,7 @@ class AVLTree:
         left.root, right.root = left_root, right_root
         return left, right
 
-    def _split_tree(self, node, key) -> tuple:
+    def _split_tree(self, node: AVLNode, key: int) -> tuple:
         """Разделение авл дерева по ключу (внутренняя часть)
 
         Args:
@@ -423,6 +423,43 @@ class AVLTree:
             node.left, node.right = None, None
             return node, left_root, right_root
 
+    def __len__(self) -> int:
+        """Магический метод определения количества нод в дереве
+
+        Returns:
+            int: количество нод в дереве
+        """
+        return self._count_nodes(self.root) if self.root else 0
+
+    def __getitem__(self, key: int) -> AVLNode:
+        """Магический метод получения узла по ключу
+
+        Args:
+            key (int): ключ
+
+        Returns:
+            AVLNode: найденный по ключу узел
+        """
+        return self._search(self.root, key)
+
+    def __delitem__(self, key: int) -> None:
+        """Магический метод удаления узла по ключу
+
+        Args:
+            key (int): ключ для удаления
+        """
+        self._delete(self.root, key)
+
+    def __str__(self) -> str:
+        """Магический метод вывода дерева в виде строки
+        
+        Используется inorder обход
+
+        Returns:
+            str: дерево в виде строки
+        """
+        return str(self.inorder_traversal()) if self.root else "Empty tree"
+
 
 # Пример использования
 if __name__ == "__main__":
@@ -433,8 +470,9 @@ if __name__ == "__main__":
         avl_tree.insert(key)
 
     print("Inorder traversal after inserts:", avl_tree.inorder_traversal())
+    print(avl_tree)
     print("Total nodes:", avl_tree.count_nodes())
-    print("Search (20): ", avl_tree.search(20), avl_tree.search(20).key)
+    print("Search (20): ", avl_tree[20], avl_tree[20].key)
 
     # Визуализация в случае правильно установленного Graphviz
     avl_tree.visualize("./viz/viz1")
