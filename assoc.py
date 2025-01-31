@@ -129,18 +129,50 @@ class MyDict:
         self.map = DoubleHashingMap()
 
     def __getitem__(self, key):
+        """Магический метод получения по ключу (arr[key])
+
+        Args:
+            key: ключ
+
+        Returns:
+            (Any | None): значение, если ключ найден, иначе None
+        """
         return self.map.search(key)
 
     def __setitem__(self, key, value) -> None:
+        """Магический метод для вставки по ключу (arr[key] = value)
+
+        Args:
+            key: ключ
+            value: значение
+        """
         self.map.insert(key, value)
 
     def __delitem__(self, key) -> None:
+        """Магический метод для удаления по ключу (del)
+
+        Args:
+            key: ключ
+        """
         self.map.delete(key)
 
     def __contains__(self, key) -> bool:
+        """Магический метод проверки наличия по ключу (key in map)
+
+        Args:
+            key (_type_): _description_
+
+        Returns:
+            bool: _description_
+        """
         return self.map.search(key) is not None
 
     def __str__(self) -> str:
+        """Магический метод получения строкового представления таблицы
+
+        Returns:
+            str: строковое представление таблицы
+        """
         return str(self.map)
 
 

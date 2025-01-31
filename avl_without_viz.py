@@ -189,7 +189,7 @@ class AVLTree:
             elif not node.right:
                 return node.left
 
-            # Узел с двумя потомками: получаем inorder-предшественника
+            # Узел с двумя потомками ищем минимум в правом поддереве
             temp = self._find_min(node.right)
             node.key = temp.key
             node.right = self._delete(node.right, temp.key)

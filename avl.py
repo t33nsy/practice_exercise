@@ -178,7 +178,7 @@ class AVLTree:
                 return node.right
             elif not node.right:
                 return node.left
-            # Узел с двумя потомками: получаем inorder-предшественника
+            # Узел с двумя потомками ищем минимум в правом поддереве
             temp = self._find_min(node.right)
             node.key = temp.key
             node.right = self._delete(node.right, temp.key)
@@ -260,6 +260,30 @@ class AVLTree:
             result.append(node.key)
             result.extend(self._preorder_traversal(node.left))
             result.extend(self._preorder_traversal(node.right))
+        return result
+
+    def postorder_traversal(self) -> list:
+        """Обход дерева в порядке (postorder)
+
+        Returns:
+            list: список узлов
+        """
+        return self._postorder_traversal(self.root)
+
+    def _postorder_traversal(self, node) -> list:
+        """Обход дерева в порядке (postorder) (внутренняя приватная часть)
+
+        Args:
+            node (AVLNode): узел для начала обхода и последующей рекурсии
+
+        Returns:
+            list: список узлов
+        """
+        result = []
+        if node:
+            result.extend(self._postorder_traversal(node.left))
+            result.extend(self._postorder_traversal(node.right))
+            result.append(node.key)
         return result
 
     def count_nodes(self) -> int:
